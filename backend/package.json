@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "test": "jest"
+    "unittest": "jest",
+    "test": "mocha tests/**/*.test.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
