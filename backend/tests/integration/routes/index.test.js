@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = require('../../../src/routes/index');
 const { Diagram, Project } = require('../../../src/models/index');
-const { expect } = require('chai'); // Ajoutez cette ligne
+const { expect } = require('chai');
 
 const app = express();
 app.use(express.json());
@@ -39,6 +39,17 @@ describe('Integration Tests', function() {
             expect(res.status).to.equal(200);
             expect(res.body).to.be.an('array').that.has.lengthOf(1);
             expect(res.body[0]).to.have.property('title', 'Test Diagram');
+        });
+    });
+
+    // Tests pour les autres routes
+    describe('GET /api/projects', function() {
+        it('should get all projects', async function() {
+            const res = await request(app).get('/api/projects');
+
+            expect(res.status).to.equal(200);
+            expect(res.body).to.be.an('array').that.has.lengthOf(1);
+            expect(res.body[0]).to.have.property('name', 'Test Project');
         });
     });
 

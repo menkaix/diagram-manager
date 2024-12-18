@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 function ProjectForm() {
   const [name, setName] = useState('');
@@ -11,11 +12,11 @@ function ProjectForm() {
     const project = { name, code };
 
     if (id) {
-      axios.put(`/api/projects/${id}`, project)
+      axios.put(`${config.backendUrl}/api/projects/${id}`, project)
         .then(response => console.log('Projet mis à jour:', response.data))
         .catch(error => console.error('Erreur lors de la mise à jour du projet:', error));
     } else {
-      axios.post('/api/projects', project)
+      axios.post(`${config.backendUrl}/api/projects`, project)
         .then(response => console.log('Projet créé:', response.data))
         .catch(error => console.error('Erreur lors de la création du projet:', error));
     }

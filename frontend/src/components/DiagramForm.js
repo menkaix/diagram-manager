@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 function DiagramForm() {
   const [title, setTitle] = useState('');
@@ -11,11 +12,11 @@ function DiagramForm() {
     const diagram = { title, content };
 
     if (id) {
-      axios.put(`/api/diagrams/${id}`, diagram)
+      axios.put(`${config.backendUrl}/api/diagrams/${id}`, diagram)
         .then(response => console.log('Diagramme mis à jour:', response.data))
         .catch(error => console.error('Erreur lors de la mise à jour du diagramme:', error));
     } else {
-      axios.post('/api/diagrams', diagram)
+      axios.post(`${config.backendUrl}/api/diagrams`, diagram)
         .then(response => console.log('Diagramme créé:', response.data))
         .catch(error => console.error('Erreur lors de la création du diagramme:', error));
     }

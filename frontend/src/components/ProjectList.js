@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 function ProjectList() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/projects')
+    axios.get(`${config.backendUrl}/api/projects`)
       .then(response => setProjects(response.data))
       .catch(error => console.error('Erreur lors de la récupération des projets:', error));
   }, []);

@@ -44,5 +44,33 @@ describe('Controller Tests', () => {
         });
     });
 
+    // Tests pour les autres fonctions du contrôleur
+    describe('getResources', () => {
+        it('should get all resources with pagination and sorting', async () => {
+            const mockResources = [{ _id: '1', title: 'Test Diagram' }];
+            sandbox.stub(Diagram, 'find').returns({
+                sort: sinon.stub().returnsThis(),
+                skip: sinon.stub().returnsThis(),
+                limit: sinon.stub().resolves(mockResources)
+            });
+
+            req.query = { page: 1, limit: 10, sortBy: 'createdAt', order: 'asc' };
+            await controller.getResources(req, res);
+
+            expect(res.status.calledWith(200)).to.be.true;
+            expect(res.json.calledWith(mockResources)).to.be.true;
+        });
+
+        it('should handle errors', async () => {
+            const errorMessage = 'Error getting resources';
+            sandbox.stub(Diagram, 'find').throws(new Error(errorMessage));
+
+            await controller.getResources(req, res);
+
+            expect(res.status.calledWith(500)).to.be.true;
+            expect(res.json.calledWith({ message: errorMessage })).to.be.true;
+        });
+    });
+
     // ...tests pour les autres fonctions du contrôleur...
 });
