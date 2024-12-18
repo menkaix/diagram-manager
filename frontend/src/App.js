@@ -1,5 +1,9 @@
 import React from 'react';
 import './App.css';
+import DiagramList from './components/DiagramList';
+import DiagramForm from './components/DiagramForm';
+import ProjectList from './components/ProjectList';
+import ProjectForm from './components/ProjectForm';
 
 function App() {
   return (
@@ -10,6 +14,10 @@ function App() {
           Gérez vos diagrammes UML pour vos projets informatiques.
         </p>
       </header>
+      <DiagramList />
+      <DiagramForm />
+      <ProjectList />
+      <ProjectForm />
     </div>
   );
 }
