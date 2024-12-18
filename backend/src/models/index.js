@@ -14,6 +14,10 @@ const diagramSchema = new mongoose.Schema({
         ref: 'Project',
         required: true
     },
+    definition: {
+        type: String,
+        required: false
+    },
     createdAt: {
         type: Date,
         default: Date.now
